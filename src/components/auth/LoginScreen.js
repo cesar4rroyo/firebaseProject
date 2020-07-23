@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  login,
   startLoginEmailPassword,
   startGoogleLogin,
 } from "../../actions/auth";

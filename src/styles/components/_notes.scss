@@ -18,7 +18,7 @@
     padding: 20px;
 }
 
-.notes__title-input, .notes__text-area{
+.notes__title-input, .notes__textarea{
     border: none;
     &:focus{
         outline: none;
@@ -30,10 +30,11 @@
     font-weight: 700;
     margin-bottom: 10px;
 }
-.notes__text-area{
+.notes__textarea{
+    border: none;
     color: $dark-grey;
     font-size: 20px;
-    float: 1 1 auto;
+    flex: 1 1 auto;
     resize: none;
 }
 .notes__image img{
