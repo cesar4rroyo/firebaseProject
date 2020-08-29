@@ -1,8 +1,7 @@
 import thunk from "redux-thunk"
 import configureStore from 'redux-mock-store';
-import { login } from "../../actions/auth"
+import { login, startLogout, startLoginEmailPassword } from "../../actions/auth"
 import { types } from "../../types/types";
-import "@testing-library/jest-dom";
 
 
 const middlewares = [thunk]
@@ -14,7 +13,9 @@ let store = mockStore(initState)
 
 describe('Pruebas en authActions', () => {
 
-    beforeEach
+    beforeEach(() => {
+        store = mockStore(initState)
+    })
 
     test('login shoul create respective action', () => {
         const uid = "ABC123";
@@ -30,9 +31,32 @@ describe('Pruebas en authActions', () => {
         });
     });
 
-    test('should do startlogout', () => {
+    test('should do startlogout', async () => {
+        await store.dispatch(startLogout());
+        const actions = store.getActions();
 
+        expect(actions[0]).toEqual({
+            type: types.logout
+        });
+
+        expect(actions[1]).toEqual({
+            type: types.notesLogoutCleaning
+        });
     })
+
+    test('should init satrtLoginWithEmailAndPassword', async () => {
+        await store.dispatch(startLoginEmailPassword("test@hotmail.com", "123456"));
+        const actions = store.getActions();
+
+        expect(actions[1]).toEqual({
+            type: types.login,
+            payload: {
+                uid: "VhbdBO1eIFdA6ZJR87T8QvbQwII2",
+                displayName: null
+            }
+        })
+    })
+
 
 
 })
